@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+label {
+	display: inline-block;
+	width: 10em;
+}
+</style>
+<!-- Uses the JSZip project for putting all the generated icons in a single download:
+     https://github.com/Stuk/jszip -->
+<script src="jszip.min.js"></script>
+<script>
+// (c) 2015 Marcin Simonides, licensed under the MIT License.
+function drawExample() {
+	var canvas = document.querySelector('canvas');
+
+	var outline_color = document.getElementById('outline_color').value;
+	var fill_color = document.getElementById('fill_color').value;
+	var empty_color = document.getElementById('empty_color').value;
+	drawPie(canvas, 0.4, 8, outline_color, 2, fill_color, empty_color);
+}
+
+function drawPie(canvas, value, radius, outline_color, outline_width, fill_color, empty_color) {
+	var context = canvas.getContext('2d');
+	context.clearRect (0 ,0, canvas.width, canvas.height);
+
+	context.fillStyle = empty_color;
+	context.beginPath();
+	context.arc(radius, radius, radius, 0, 2*Math.PI);
+	context.fill();
+
+	context.fillStyle = fill_color;
+	context.beginPath();
+	context.arc(radius, radius, radius - 1, -0.5*Math.PI, (-0.5 + 2*value)*Math.PI);
+	context.lineTo(radius, radius);
+	context.fill();
+
+	context.strokeStyle = outline_color;
+	context.lineWidth = outline_width;
+	context.beginPath();
+	context.arc(radius, radius, radius - (outline_width/2), 0, 2*Math.PI);
+	context.stroke();
+}
+
+function removeAllChildren(element) {
+	while (element.firstChild)
+		element.removeChild(element.firstChild);
+}
+
+function generate() {
+	var count = document.getElementById('frame_count').value;
+	var outline_color = document.getElementById('outline_color').value;
+	var fill_color = document.getElementById('fill_color').value;
+	var empty_color = document.getElementById('empty_color').value;
+
+	var output_element = document.getElementById('output');
+	removeAllChildren(output_element);
+
+	var zip = new JSZip();
+	var folder = zip.folder('icons');
+	for (var i = 0; i < count; ++i) {
+		var canvas = document.createElement('canvas');
+		canvas.width = 16;
+		canvas.height = 16;
+
+		drawPie(canvas, i/(count - 1), 8, outline_color, 2, fill_color, empty_color);
+		output_element.appendChild(canvas);
+		var base64data = canvas.toDataURL('image/png');
+		var comma_index = base64data.indexOf(',');
+		folder.file(i + '.png',
+		            base64data.substr(comma_index + 1),
+		            { base64: true });
+	}
+
+	// Download
+	window.location =
+		'data:application/zip;base64,' + zip.generate({ type: 'base64' });
+}
+
+function init() {
+	document.getElementById('outline_color')
+		.addEventListener('change', drawExample, false);
+	document.getElementById('fill_color')
+		.addEventListener('change', drawExample, false);
+	document.getElementById('empty_color')
+		.addEventListener('change', drawExample, false);
+
+	document.getElementById('generate').addEventListener('click', generate, false);
+
+	drawExample();
+}
+
+window.addEventListener('load', init, false);
+</script>
+</head>
+<body>
+<form>
+<label for="frame_count">Number of frames:</label>
+<input type="number" id="frame_count" min="2" max="128" value="17"><br>
+<label for="outline_color">Outline color:</label>
+<input type="color" id="outline_color" value="#000000"><br>
+<label for="fill_color">Fill color:</label>
+<input type="color" id="fill_color" value="#000000"><br>
+<label for="empty_color">Empty color:</label>
+<input type="color" id="empty_color" value="#ffffff"><br>
+<canvas width="16" height="16"></canvas><br>
+<button type="button" id="generate">Generate and download!</button>
+</form>
+
+<div id="output"></div>
+</body>
+</html>
