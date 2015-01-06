@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="fav-progress-icon.js"></script>
+<script>
+var progress = new FavProgressIcon(33, 'example-icons/');
+
+var value = 0.0;
+function updateValue() {
+	if (value < 1.0) {
+		value = value + 0.005;
+	} else {
+		value = 0.0;
+	}
+	progress.setValue(value);
+}
+
+setInterval(updateValue, 100);
+</script>
+</head>
+<body>
+A simple example for the
+<a href="https://github.com/msimonides/fav-progress-icon/">fav-progress-icon project</a>.
+Observe the favicon for this page!
+</body>
+</html>
