@@ -1,8 +1,9 @@
 fav-progress-icon 1.0
 =====================
 
-Display progress in your page's favicon! fav-progress-icon is a small JS library for switching favicon images to represent a value from the 0.0 to 1.0 range.
+Display progress in your page's favicon!
 
+fav-progress-icon is a small JS library for switching favicon images to represent a value from the 0.0 to 1.0 range.
 The images are prepared in advance which puts more work on you but provides compatibility with IE (the newer versions at least) and allows for completely custom progress visualization.
 
 [Live demo.](https://msimonides.github.io/fav-progress-icon/example.html)
