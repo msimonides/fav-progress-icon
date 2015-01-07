@@ -29,7 +29,7 @@ Usage Example
 Where to Get the Icons?
 -----------------------
 
-Create the images by hand or use the provided [icon generator](https://msimonides.github.io/fav-progress-icon/icon-generator.html). The number of the images is up to you, just make sure to provide it to the `FavProgressIcon` constructor.
+Either create the individual images in a graphics program or use the provided [icon generator](https://msimonides.github.io/fav-progress-icon/icon-generator.html). The number of the images is up to you, just make sure to provide it to the `FavProgressIcon` constructor.
 
 Credits
 -------
