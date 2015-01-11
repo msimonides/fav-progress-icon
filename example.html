@@ -1,9 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>&lt;-------</title>
+<style>
+body {
+	max-width: 45em;
+	margin: 1em auto;
+}
+
+label.type {
+	display: inline-block;
+	width: 2em;
+}
+</style>
 <script src="fav-progress-icon.js"></script>
 <script>
-var progress = new FavProgressIcon(33, 'example-icons/');
+var progress;
+
+function switchToPie() {
+	progress = new FavProgressIcon(33, 'example-icons/pie/');
+}
+
+function switchToBar() {
+	progress = new FavProgressIcon(25, 'example-icons/bar/');
+}
 
 var value = 0.0;
 function updateValue() {
@@ -15,12 +35,34 @@ function updateValue() {
 	progress.setValue(value);
 }
 
-setInterval(updateValue, 100);
+function init() {
+	switchToPie();
+	setInterval(updateValue, 100);
+	document.getElementById('type_pie').addEventListener('change', switchToPie, false);
+	document.getElementById('type_bar').addEventListener('change', switchToBar, false);
+}
+
+window.addEventListener('load', init, false);
 </script>
 </head>
 <body>
+<p>
 A simple example for the
 <a href="https://github.com/msimonides/fav-progress-icon/">fav-progress-icon project</a>.
 Observe the favicon for this page!
+</p>
+
+<form>
+<label>Icon type:</label>
+<input type="radio" name="type" id="type_pie" value="pie" checked="checked">
+<label class="type" for="type_pie">
+<img width="16" height="16" src="example-icons/pie/14.png">
+</label>
+<input type="radio" name="type" id="type_bar" value="bar">
+<label class="type" for="type_bar">
+<img width="16" height="16" src="example-icons/bar/8.png">
+</label>
+</form>
+
 </body>
 </html>
