@@ -3,10 +3,12 @@ fav-progress-icon 1.0
 
 Display progress in your page's favicon!
 
-fav-progress-icon is a small JS library for switching favicon images to represent a value from the 0.0 to 1.0 range.
-The images are prepared in advance which puts more work on you but provides compatibility with IE (the newer versions at least) and allows for completely custom progress visualization.
+![](http://msimonides.github.io/fav-progress-icon/demo.png)
 
 [Live demo.](https://msimonides.github.io/fav-progress-icon/example.html)
+
+fav-progress-icon is a small JS library for switching favicon images to represent a value from the 0.0 to 1.0 range.
+The images are prepared in advance which puts more work on you but provides compatibility with IE (the newer versions at least) and allows for completely custom progress visualization.
 
 Usage Example
 -------------
@@ -29,12 +31,24 @@ Usage Example
 Where to Get the Icons?
 -----------------------
 
-Either create the individual images in a graphics program or use the provided [icon generator](https://msimonides.github.io/fav-progress-icon/icon-generator.html). The number of the images is up to you, just make sure to provide it to the `FavProgressIcon` constructor.
+Use the provided [icon generator](https://msimonides.github.io/fav-progress-icon/icon-generator.html).
+
+Or create the images yourself. They need to be 16x16 PNGs named: `0.png`, `1.png`,... The number of the images is up to you, just make sure to provide it to the `FavProgressIcon` constructor.
+
+Browser Compatibility
+---------------------
+
+* Chrome,
+* Firefox,
+* Internet Explorer 11+,
+* Opera.
+
+Probably others as well.
 
 Credits
 -------
 
-Inspired by [Piecon](https://github.com/lipka/piecon) (actually, the goal of this project is: a Piecon that works in IE).
+Inspired by [Piecon](https://github.com/lipka/piecon) (actually, the goal of this project is to create a Piecon that works in IE).
 
 License
 -------
